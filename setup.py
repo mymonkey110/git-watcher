@@ -9,20 +9,19 @@ def readme():
 setup(
     name='git-watcher',
     version='0.1',
-    keywords=('git', 'git-watcher', 'github', 'blog'),
+    keywords=('git', 'git-watcher', 'github', 'blog', 'hexo', 'baidu'),
     url='https://github.com/mymonkey110/git-watcher',
-    description="ssh host command manager tool",
+    description="git watcher will rebuild your repository when you push code to github.",
     long_description=readme(),
     license='MIT License',
-    install_requires=['pexpect', 'ptyprocess', 'tabulate'],
+    install_requires=[],
     author='Michael Jiang',
     author_email='mymonkey110@gmail.com',
     maintainer='Michael Jiang',
     maintainer_email='mymonkey110@gmail.com',
-    packages=['git-watcher'],
+    packages=['watcher'],
     package_data={
     },
-    platform=('Linux', 'Mac'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -32,7 +31,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'sm = sm.main:main',
+            'git-watcher=watcher.main:main',
         ]
     }
 )
