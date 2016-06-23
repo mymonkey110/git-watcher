@@ -14,6 +14,10 @@ import os
 import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
+import sys
+
+import signal
+
 __version__ = '0.2'
 current_dir = os.path.dirname(__file__)
 
@@ -48,8 +52,9 @@ class WebhookHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         headers = self.headers
-        event = headers('X-GitHub-Event')
+        event = headers.get('X-GitHub-Event')
         if event is None or event != 'push':
+            print 'not push event, not rebuild'
             self.response("not push event")
         else:
             sig = headers.get('X-Hub-Signature')
@@ -59,11 +64,15 @@ class WebhookHandler(BaseHTTPRequestHandler):
                 WebhookHandler.watcher.update()
                 self.response("ok")
             else:
+                print 'validation failed, not rebuild'
                 self.response('validate fail')
 
     def response(self, message):
         message = {'result': message}
-        self.send_response(code=200, message=json.dumps(message))
+        self.send_response(code=200)
+        self.send_header('Content-Type', 'application-json')
+        self.end_headers()
+        self.wfile.write(json.dumps(message))
 
     @classmethod
     def initialize(cls):
@@ -118,9 +127,16 @@ class GitWatcher(object):
             self.pull()
 
 
+def exit(signal, frame):
+    sys.exit(0)
+
+
 def run():
     global options
     options = parser.parse_args()
+
+    signal.signal(signal.SIGINT, exit)
+
     webhook_watcher = WebhookWatcher(WebhookHandler)
     webhook_watcher.start()
 
