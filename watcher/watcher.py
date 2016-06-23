@@ -18,13 +18,13 @@ import sys
 
 import signal
 
-__version__ = '0.2'
+__version__ = '0.4'
 current_dir = os.path.dirname(__file__)
 
 parser = argparse.ArgumentParser(description='git-watcher', version=__version__, prog='git-watcher')
 
 parser.add_argument('-i', action='store', dest='ip', default='0.0.0.0', help='listen ip address')
-parser.add_argument('-p', action='store', dest='port', default=8000, help='listen port')
+parser.add_argument('-p', action='store', dest='port', default=8000, help='listen port', type=int)
 parser.add_argument('-u', action='store', dest='repo_url', help='git repository url', required=True)
 parser.add_argument('-b', action='store', dest='branch', default='master', help='watch branch')
 parser.add_argument('-s', action='store', dest='secret', help='secret key of webhook', required=True)

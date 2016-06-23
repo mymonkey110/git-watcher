@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='git-watcher',
-    version='0.2',
+    version='0.4',
     keywords=('git', 'git-watcher', 'github', 'blog', 'hexo', 'baidu'),
     url='https://github.com/mymonkey110/git-watcher',
     description="git watcher will rebuild your repository when you push code to github.",
