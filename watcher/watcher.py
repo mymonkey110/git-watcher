@@ -9,6 +9,7 @@
 import argparse
 import hashlib
 import hmac
+import json
 import os
 import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
@@ -19,12 +20,12 @@ current_dir = os.path.dirname(__file__)
 
 parser = argparse.ArgumentParser(description='git-watcher', version=__version__, prog='git-watcher')
 
-parser.add_argument('-i', action='store', dest='ip', default='0.0.0.0', help='listen ip address')
-parser.add_argument('-p', action='store', dest='port', default=8000, help='listen port')
-parser.add_argument('-u', action='store', dest='repo_url', help='git repository url', required=True)
-parser.add_argument('-b', action='store', dest='branch', default='master', help='watch branch')
-parser.add_argument('-s', action='store', dest='secret', help='secret key of webhook', required=True)
-parser.add_argument('-d', action='store', dest='dir', default=current_dir, help='local repository directory')
+parser.add_argument('-i', '--ip', action='store', dest='ip', default='0.0.0.0', help='listen ip address')
+parser.add_argument('-p', '--port', action='store', dest='port', default=8000, help='listen port')
+parser.add_argument('-u', '--repo_url', action='store', dest='repo_url', help='git repository url', required=True)
+parser.add_argument('-b', '--branch', action='store', dest='branch', default='master', help='watch branch')
+parser.add_argument('-s', '--secret', action='store', dest='secret', help='secret key of webhook', required=True)
+parser.add_argument('-d', '--dir', action='store', dest='dir', default=current_dir, help='local repository directory')
 
 options = None
 
@@ -35,6 +36,9 @@ class Validator(object):
         self.digest_maker = hmac.new(self.secret, '', hashlib.sha1)
 
     def validate(self, body, sha1):
+        if body is None or sha1 is None:
+            return False
+
         self.digest_maker.update(body)
         return self.digest_maker.hexdigest() == sha1
 
@@ -45,14 +49,22 @@ class WebhookHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         headers = self.headers
-        sig = headers['X-Hub-Signature']
-        data = self.rfile.read(int(self.headers['content-length']))
-        print headers, data
-        self.initialize()
-        if WebhookHandler.validator.validate(data, sig[sig.find('=') + 1:]):
-            WebhookHandler.watcher.update()
+        event = headers('X-GitHub-Event')
+        if event is None or event != 'push':
+            self.response("not push event")
         else:
-            print 'validate failed'
+            sig = headers.get('X-Hub-Signature')
+            data = self.rfile.read(int(self.headers['content-length']))
+            self.initialize()
+            if WebhookHandler.validator.validate(data, sig[sig.find('=') + 1:]):
+                WebhookHandler.watcher.update()
+                self.response("ok")
+            else:
+                self.response('validate fail')
+
+    def response(self, message):
+        message = {'result': message}
+        self.send_response(code=200, message=json.dumps(message))
 
     @classmethod
     def initialize(cls):
