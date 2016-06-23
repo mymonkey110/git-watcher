@@ -15,17 +15,16 @@ import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 __version__ = '0.2'
-
 current_dir = os.path.dirname(__file__)
 
 parser = argparse.ArgumentParser(description='git-watcher', version=__version__, prog='git-watcher')
 
-parser.add_argument('-i', '--ip', action='store', dest='ip', default='0.0.0.0', help='listen ip address')
-parser.add_argument('-p', '--port', action='store', dest='port', default=8000, help='listen port')
-parser.add_argument('-u', '--repo_url', action='store', dest='repo_url', help='git repository url', required=True)
-parser.add_argument('-b', '--branch', action='store', dest='branch', default='master', help='watch branch')
-parser.add_argument('-s', '--secret', action='store', dest='secret', help='secret key of webhook', required=True)
-parser.add_argument('-d', '--dir', action='store', dest='dir', default=current_dir, help='local repository directory')
+parser.add_argument('-i', action='store', dest='ip', default='0.0.0.0', help='listen ip address')
+parser.add_argument('-p', action='store', dest='port', default=8000, help='listen port')
+parser.add_argument('-u', action='store', dest='repo_url', help='git repository url', required=True)
+parser.add_argument('-b', action='store', dest='branch', default='master', help='watch branch')
+parser.add_argument('-s', action='store', dest='secret', help='secret key of webhook', required=True)
+parser.add_argument('-d', action='store', dest='dir', default=current_dir, help='local repository directory')
 
 options = None
 
