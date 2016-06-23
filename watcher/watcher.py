@@ -14,7 +14,7 @@ import os
 import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 current_dir = os.path.dirname(__file__)
 
