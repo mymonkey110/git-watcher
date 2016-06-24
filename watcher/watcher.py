@@ -16,7 +16,7 @@ import os
 import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-__version__ = '0.6'
+__version__ = '0.7'
 current_dir = os.getcwd()
 
 parser = argparse.ArgumentParser(description='git-watcher', version=__version__, prog='git-watcher')

@@ -1,5 +1,5 @@
-SM: command tool for managing ssh host 
-======================================
+Git-Watcher : automatic rebuild your repository when you push code to github
+============================================================================
 
 
 Install
@@ -42,7 +42,9 @@ Linux/Mac OS support
 Articles
 --------
 
-.. _here: http://asciinema.org/a/cszwmuc3w6fhqpgudq6r34hoi
+  利用git-watcher让百度索引你的github博客_
+
+ .. _利用git-watcher让百度索引你的github博客: http://michael-j.net/2016/06/23/%E8%AE%A9%E7%99%BE%E5%BA%A6%E7%B4%A2%E5%BC%95%E4%BD%A0%E7%9A%84github%E7%9A%84%E5%8D%9A%E5%AE%A2
 
 
 License
