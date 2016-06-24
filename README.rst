@@ -39,12 +39,18 @@ Platform Support
 Linux/Mac OS support
 
 
+Articles
+--------
+
+.. _here: http://asciinema.org/a/cszwmuc3w6fhqpgudq6r34hoi
+
+
 License
 -------
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Michael Jiang
+Copyright (c) 2016 Michael Jiang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -41,12 +41,17 @@ To install git-watcher, simply:
 Linux/Mac OS support
 
 
+### Articles
+
+#### [利用git-watcher让百度索引你的github博客] (http://michael-j.net/2016/06/23/%E8%AE%A9%E7%99%BE%E5%BA%A6%E7%B4%A2%E5%BC%95%E4%BD%A0%E7%9A%84github%E7%9A%84%E5%8D%9A%E5%AE%A2/)
+
+
 ### License
 -------
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Michael Jiang
+Copyright (c) 2016 Michael Jiang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
