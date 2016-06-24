@@ -11,14 +11,6 @@ To install git-watcher, simply:
     
     $ pip install git-watcher
 
-Demo
-----
-
-Click here_ to watch
-
-.. _here: http://asciinema.org/a/cszwmuc3w6fhqpgudq6r34hoi
-
-
 
 Usage
 -----

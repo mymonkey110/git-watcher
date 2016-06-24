@@ -6,6 +6,8 @@
 
 # !/usr/bin/env python
 
+import sys
+import signal
 import argparse
 import hashlib
 import hmac
@@ -14,12 +16,8 @@ import os
 import subprocess
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
-import sys
-
-import signal
-
-__version__ = '0.4'
-current_dir = os.path.dirname(__file__)
+__version__ = '0.6'
+current_dir = os.getcwd()
 
 parser = argparse.ArgumentParser(description='git-watcher', version=__version__, prog='git-watcher')
 

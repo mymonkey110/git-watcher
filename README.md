@@ -10,11 +10,11 @@ To install git-watcher, simply:
   $ pip install git-watcher
 ```
 
-### Demo
-----
 
-Click [here](#) to watch
+#### Feature
 
+* specify tracking branch
+* event & signature validation
 
 ### Usage
 -----
